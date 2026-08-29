@@ -1,13 +1,17 @@
-This folder is a drop zone. **Live pages now load photos from `media/`.**
+# Extra photo drop zone
 
-Still useful for extra Drive / Instagram files Dean wants on the site. After upload, point the HTML `src` at the new file (or copy it into `media/`).
+**Live pages load from `media/`.** This folder is for Drive / Instagram files Dean or Charles upload later.
 
-Still missing from public brand sites (TODO):
-- Dedicated long-black / espresso stills
-- Loaded NY cookie product shots (Dough-Chi / Dough Bros)
+Charles is compressing a web-sized set of the ZBM shoots. After that zip lands:
 
-Best sources already in Drive:
-- Paradise content shoot Oct 2025
-- Dough-Chi content shoot March 2026 (`DOUGH-CHI CONTENT / PHOTO (EDITS)`)
-- Nalou Logo [Burger].png
-- Hiring Media (video — convert a still if you want a careers hero)
+1. Upload into `media/` (preferred) or here.
+2. Point the HTML `src` at the new filename.
+3. Do not hotlink Drive or Instagram CDNs.
+
+## Drive folders (private — agents cannot open these)
+
+- Nalou August 2026 FULL ALBUM: `1U7Oh0LnsNZwBLyT8rJM2KXtsnmf4pCBn`
+- Paradise: `1Q_YCnvK-b-oLxxkFfENBKSL3NNLOE-cy`
+- Also in Drive: DOUGHBROS CONTENT, October shoots (loaded cookies / food / candid), DOUGH-CHI, Nalou winter menu, `Nalou Logo [Burger].png`
+
+See `media/SOURCES.md` for what already shipped from the public brand sites.
