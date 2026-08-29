@@ -26,10 +26,10 @@
   <header class="hero hero-light" style="min-height:auto;padding-bottom:24px">
     <p class="hero-kicker">DTLL Group careers</p>
     <h1>Work across DTLL Group</h1>
-    <p class="sub">Apply across Dough Bros, Paradise Pizzas and Nalou Kitchen. Two minutes.</p>
+    <p class="sub">Apply across Dough Bros, Paradise Pizzas and Nalou Kitchen. Attach a resume and cover letter.</p>
     <div class="careers-media">
-      <img src="media/paradise-shop-01.jpg" alt="Paradise Pizzas staff at the shop" />
-      <img src="media/doughbros-shop-02.jpg" alt="Inside Dough Bros — the Dough-Chi line and neon" />
+      <img src="media/careers-team.jpg" alt="The rooms — a loaded shake in the house" />
+      <img src="media/careers-line.jpg" alt="Seasoning fries on the line" />
     </div>
   </header>
   <section class="section section-white" style="padding-top:24px">
@@ -52,7 +52,7 @@
       <p class="eyebrow" id="modal-meta">Role</p>
       <h2 id="modal-title">Role title</h2>
       <p class="job-desc" id="modal-body"></p>
-      <form class="form" id="apply-form" action="https://formsubmit.co/courtney@lnmd.com.au" method="POST">
+      <form class="form" id="apply-form" action="https://formsubmit.co/courtney@lnmd.com.au" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="New job application — DTLL Group careers" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
@@ -82,7 +82,21 @@
           <option>Either</option>
         </select></label>
         <label>Why this role?<textarea name="message" required></textarea></label>
-        <p class="hint">Goes to courtney@lnmd.com.au</p>
+        <div class="form-row">
+          <div>
+            <label>Resume
+              <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+              <span class="file-hint">PDF, DOC or DOCX</span>
+            </label>
+          </div>
+          <div>
+            <label>Cover letter
+              <input type="file" name="cover_letter" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+              <span class="file-hint">PDF, DOC or DOCX</span>
+            </label>
+          </div>
+        </div>
+        <p class="hint">Goes to courtney@lnmd.com.au. Combined files under 10MB. Courtney may need a one-time FormSubmit confirm if she has not already.</p>
         <button class="btn" type="submit">Submit application</button>
       </form>
     </div>

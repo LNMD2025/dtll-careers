@@ -1,6 +1,8 @@
-# dtll.org — DTLL Group careers + menu landings
+# dtll.org — DTLL Group
 
 Static site for **DTLL Group**: Dough Bros, Paradise Pizzas and Nalou Kitchen.
+
+Home, pizza, pasta, coffee and cookies are cinematic brand showcases. **Hiring lives only on Careers** (`careers.html`), including resume and cover letter uploads via FormSubmit to courtney@lnmd.com.au.
 
 Live: **https://dtll.org** (Cloudflare Pages project `dtll-careers`, deploys from `main`)
 

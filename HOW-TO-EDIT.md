@@ -19,7 +19,7 @@ Cloudflare rebuilds in about a minute.
 |---|---|
 | Home page copy | `index.html` |
 | Jobs list (titles, locations, descriptions) | `js/main.js` — the `jobs` array |
-| Apply form / Courtney email | `careers.html` |
+| Apply form / Courtney email / resume + cover letter | `careers.html` (multipart FormSubmit) |
 | Pizza / pasta / coffee / cookie pages | `pizzas.html` `pasta.html` `coffee.html` `cookies.html` |
 | Colours, type, layout | `css/styles.css` |
 | Photos | drop files into `media/` (preferred) or `images/` then point the `src` at them |

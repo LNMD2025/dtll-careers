@@ -28,6 +28,45 @@ function openJob(id){
   document.body.style.overflow="hidden";
 }
 function closeModal(){const m=$("#job-modal"); if(m) m.classList.remove("open"); document.body.style.overflow=""}
+function initApplyForm(){
+  const form=$("#apply-form"); if(!form) return;
+  form.addEventListener("submit",e=>{
+    const files=[...form.querySelectorAll('input[type="file"]')].flatMap(i=>[...i.files]);
+    const total=files.reduce((n,f)=>n+f.size,0);
+    if(total>10*1024*1024){
+      e.preventDefault();
+      alert("Please keep resume and cover letter under 10MB combined.");
+    }
+  });
+}
+function initCinematic(){
+  const chapters=$all("[data-chapter]");
+  if(!chapters.length) return;
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)");
+  const apply=()=>{
+    if(reduce.matches){
+      chapters.forEach(ch=>ch.style.setProperty("--p","1"));
+      return;
+    }
+    const vh=window.innerHeight||1;
+    chapters.forEach(ch=>{
+      const r=ch.getBoundingClientRect();
+      const span=Math.max(ch.offsetHeight-vh,1);
+      const p=Math.min(1,Math.max(0,-r.top/span));
+      ch.style.setProperty("--p",p.toFixed(4));
+    });
+  };
+  let ticking=false;
+  const onScroll=()=>{
+    if(ticking) return;
+    ticking=true;
+    requestAnimationFrame(()=>{apply(); ticking=false});
+  };
+  window.addEventListener("scroll",onScroll,{passive:true});
+  window.addEventListener("resize",onScroll,{passive:true});
+  if(reduce.addEventListener) reduce.addEventListener("change",apply);
+  apply();
+}
 document.addEventListener("DOMContentLoaded",()=>{
   const toggle=$(".nav-toggle"); if(toggle) toggle.addEventListener("click",toggleNav);
   renderJobs();
@@ -35,4 +74,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   const backdrop=$("#job-modal"); if(backdrop) backdrop.addEventListener("click",e=>{if(e.target===backdrop) closeModal()});
   const closeBtn=$(".close"); if(closeBtn) closeBtn.addEventListener("click",closeModal);
   document.addEventListener("keydown",e=>{if(e.key==="Escape") closeModal()});
+  initApplyForm();
+  initCinematic();
 });
