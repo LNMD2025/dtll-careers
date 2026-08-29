@@ -17,4 +17,4 @@ Do not wrangler-deploy this site. Do not create a new Pages project.
 
 ## Media
 
-Brand photos live in `media/` (public shop-site files, committed locally). Drive ZBM albums and Charles’s web-sized zip land in a follow-up — see `media/SOURCES.md`.
+Brand photos live in `media/`. Home and careers use Dean-owned Drive stills (`doughbros-*`, `paradise-*`, `nalou-*`). See `media/SOURCES.md`.

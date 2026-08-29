@@ -37,7 +37,7 @@ Cloudflare rebuilds in about a minute.
 
 Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way.
 
-Charles is compressing a web-sized set of the ZBM Drive albums (Nalou August 2026 `1U7Oh0LnsNZwBLyT8rJM2KXtsnmf4pCBn`, Paradise `1Q_YCnvK-b-oLxxkFfENBKSL3NNLOE-cy`, plus Dough Bros / Dough-Chi / winter menu). Drop that zip’s files into `media/` when ready. Folder IDs and swap priority: `media/SOURCES.md`.
+Home + careers already use the Dean-owned Drive set in `media/` (`doughbros-*.jpg`, `paradise-*.jpg`, `nalou-*.jpg` / `.png`). Folder IDs and the filename map: `media/SOURCES.md`.
 
 ## Add or remove a job
 
