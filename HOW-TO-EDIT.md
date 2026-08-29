@@ -35,7 +35,9 @@ Cloudflare rebuilds in about a minute.
 <img src="media/pizza-hero.jpg" alt="Dough Bros pizza" />
 ```
 
-Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way. Live pages already use venue photos from the official brand sites — see `media/SOURCES.md`.
+Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way.
+
+Home + careers already use the Dean-owned Drive set in `media/` (`doughbros-*.jpg`, `paradise-*.jpg`, `nalou-*.jpg` / `.png`). Folder IDs and the filename map: `media/SOURCES.md`.
 
 ## Add or remove a job
 

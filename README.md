@@ -17,4 +17,4 @@ Do not wrangler-deploy this site. Do not create a new Pages project.
 
 ## Media
 
-Brand photos live in `media/`. Sources and a TODO for missing espresso / cookie product shots are in `media/SOURCES.md`.
+Brand photos live in `media/`. Home and careers use Dean-owned Drive stills (`doughbros-*`, `paradise-*`, `nalou-*`). See `media/SOURCES.md`.
