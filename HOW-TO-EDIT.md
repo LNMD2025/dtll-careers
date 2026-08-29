@@ -35,7 +35,9 @@ Cloudflare rebuilds in about a minute.
 <img src="media/pizza-hero.jpg" alt="Dough Bros pizza" />
 ```
 
-Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way. Live pages already use venue photos from the official brand sites — see `media/SOURCES.md`.
+Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way.
+
+Charles is compressing a web-sized set of the ZBM Drive albums (Nalou August 2026 `1U7Oh0LnsNZwBLyT8rJM2KXtsnmf4pCBn`, Paradise `1Q_YCnvK-b-oLxxkFfENBKSL3NNLOE-cy`, plus Dough Bros / Dough-Chi / winter menu). Drop that zip’s files into `media/` when ready. Folder IDs and swap priority: `media/SOURCES.md`.
 
 ## Add or remove a job
 
