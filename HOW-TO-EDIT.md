@@ -22,20 +22,20 @@ Cloudflare rebuilds in about a minute.
 | Apply form / Courtney email | `careers.html` |
 | Pizza / pasta / coffee / cookie pages | `pizzas.html` `pasta.html` `coffee.html` `cookies.html` |
 | Colours, type, layout | `css/styles.css` |
-| Photos | drop files into `images/` then point the `src` at them |
+| Photos | drop files into `media/` (preferred) or `images/` then point the `src` at them |
 
 ## Add a photo from Drive or Instagram
 
 1. Download the image to your computer (from Drive or IG).
 2. In the repo click **Add file → Upload files**.
-3. Put it in `images/` e.g. `images/pizza-hero.jpg`.
+3. Put it in `media/` e.g. `media/pizza-hero.jpg` (or `images/` if you prefer that folder).
 4. In the HTML change the image tag to:
 
 ```html
-<img src="images/pizza-hero.jpg" alt="DoughBros pizza" />
+<img src="media/pizza-hero.jpg" alt="Dough Bros pizza" />
 ```
 
-Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `images/` is the reliable way.
+Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way. Live pages already use venue photos from the official brand sites — see `media/SOURCES.md`.
 
 ## Add or remove a job
 

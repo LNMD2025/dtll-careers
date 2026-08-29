@@ -1,15 +1,10 @@
-Drop brand photos here, then point HTML `src` at them.
+This folder is a drop zone. **Live pages now load photos from `media/`.**
 
-Suggested filenames used by the site:
+Still useful for extra Drive / Instagram files Dean wants on the site. After upload, point the HTML `src` at the new file (or copy it into `media/`).
 
-- hero-pizza.jpg
-- pizza.jpg
-- pasta.jpg
-- coffee.jpg
-- cookies.jpg
-- nalou-logo.png
-- paradise-logo.png
-- doughbros-logo.png
+Still missing from public brand sites (TODO):
+- Dedicated long-black / espresso stills
+- Loaded NY cookie product shots (Dough-Chi / Dough Bros)
 
 Best sources already in Drive:
 - Paradise content shoot Oct 2025
