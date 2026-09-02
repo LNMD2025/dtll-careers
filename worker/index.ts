@@ -187,7 +187,7 @@ async function listPublicJobs(env: Env): Promise<Response> {
     { headers: restHeaders(env) },
   );
   if (error) return errorJson(error, 500);
-  return json({ jobs: (data || []).map(publicJob) }, 200, true);
+  return json({ jobs: (data || []).map(publicJob) }, 200, false);
 }
 
 async function listPublicMedia(env: Env): Promise<Response> {
@@ -205,7 +205,7 @@ async function listPublicMedia(env: Env): Promise<Response> {
       updated_at: row.updated_at,
     };
   }
-  return json({ slots }, 200, true);
+  return json({ slots }, 200, false);
 }
 
 async function adminListJobs(env: Env, jwt: string): Promise<Response> {

@@ -88,32 +88,33 @@ function initCinematic(){
 async function loadLiveJobs(){
   if(!$("#job-list")) return;
   try{
-    const res=await fetch("/api/jobs",{headers:{accept:"application/json"}});
+    const res=await fetch("/api/jobs",{cache:"no-store",headers:{accept:"application/json"}});
     if(!res.ok) return;
     const data=await res.json();
-    if(Array.isArray(data.jobs) && data.jobs.length){
-      jobs=data.jobs.map(j=>({
-        id:j.id,
-        title:j.title,
-        brand:j.brand,
-        store:j.store,
-        location:j.location || j.location_label || "",
-        type:j.type || j.employment_type || "",
-        summary:j.summary || j.title,
-        body:j.body || j.description || ""
-      }));
-      const active=$(".filter.active");
-      renderJobs(active?active.dataset.filter:"All");
-    }
+    if(!Array.isArray(data.jobs)) return;
+    // Successful API response always wins — including an empty list (all archived).
+    // Never keep hardcoded fallback after a live CMS response.
+    jobs=data.jobs.map(j=>({
+      id:j.id,
+      title:j.title,
+      brand:j.brand,
+      store:j.store,
+      location:j.location || j.location_label || "",
+      type:j.type || j.employment_type || "",
+      summary:j.summary || j.title,
+      body:j.body || j.description || ""
+    }));
+    const active=$(".filter.active");
+    renderJobs(active?active.dataset.filter:"All");
   }catch(_err){
-    // Keep the hardcoded fallback so Cloudflare Pages still shows roles.
+    // Keep the hardcoded fallback only when the CMS API is unreachable.
   }
 }
 async function applyMediaSlots(){
   const slotted=$all("[data-slot]");
   if(!slotted.length) return;
   try{
-    const res=await fetch("/api/media",{headers:{accept:"application/json"}});
+    const res=await fetch("/api/media",{cache:"no-store",headers:{accept:"application/json"}});
     if(!res.ok) return;
     const data=await res.json();
     const slots=data.slots || {};
