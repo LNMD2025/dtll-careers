@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DTLL Admin</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body class="admin-body">
+  <header class="admin-top">
+    <a class="logo" href="/index.html">DTLL <span>Admin</span></a>
+    <div class="admin-top-actions">
+      <span id="who" class="admin-who" hidden></span>
+      <button class="btn-ghost" id="sign-out" type="button" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section id="login-panel" class="admin-card">
+      <p class="eyebrow">Staff only</p>
+      <h1>Sign in to edit the site</h1>
+      <p class="admin-lead">Magic link goes to your LNMD inbox. Dean, Tash and Courtney — use your @lnmd.com.au email.</p>
+      <form id="login-form" class="form">
+        <label>Work email
+          <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="you@lnmd.com.au" />
+        </label>
+        <button class="btn" type="submit">Email me a sign-in link</button>
+        <p id="login-status" class="admin-status" role="status"></p>
+      </form>
+    </section>
+
+    <section id="app-panel" hidden>
+      <nav class="admin-tabs" aria-label="Admin sections">
+        <button class="admin-tab active" type="button" data-tab="jobs">Jobs</button>
+        <button class="admin-tab" type="button" data-tab="media">Images</button>
+      </nav>
+
+      <section id="tab-jobs">
+        <div class="admin-toolbar">
+          <h2>Job listings</h2>
+          <button class="btn" id="new-job" type="button">New job</button>
+        </div>
+        <p class="admin-hint">Open roles show on Careers. Archive hides a role without deleting it. Use the arrows to reorder.</p>
+        <div id="job-admin-list" class="admin-job-list"></div>
+      </section>
+
+      <section id="tab-media" hidden>
+        <div class="admin-toolbar">
+          <h2>Site images</h2>
+        </div>
+        <p class="admin-hint">Each card is a slot the public pages already use. Upload a replacement and that page picks it up on the next load.</p>
+        <div id="media-admin-list" class="admin-media-grid"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="job-editor">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" type="button" aria-label="Close">×</button>
+      <p class="eyebrow" id="editor-kicker">Job</p>
+      <h2 id="editor-title">Edit job</h2>
+      <form id="job-form" class="form">
+        <input type="hidden" id="job-id" />
+        <label>Title<input type="text" id="job-title" required /></label>
+        <div class="form-row">
+          <div>
+            <label>Store
+              <select id="job-store" required>
+                <option value="doughbros">Dough Bros</option>
+                <option value="paradise">Paradise Pizzas</option>
+                <option value="nalou">Nalou Kitchen</option>
+                <option value="all">All brands / group</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label>Employment type<input type="text" id="job-type" placeholder="Casual / Part-time" /></label>
+          </div>
+        </div>
+        <label>Location<input type="text" id="job-location" placeholder="Mount Gambier Marketplace" /></label>
+        <label>Description
+          <textarea id="job-description" required placeholder="First paragraph is the card summary. The rest shows in the apply popup."></textarea>
+        </label>
+        <label class="admin-check">
+          <input type="checkbox" id="job-active" checked />
+          Active — show on Careers
+        </label>
+        <p id="editor-status" class="admin-status" role="status"></p>
+        <button class="btn" type="submit">Save job</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

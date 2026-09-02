@@ -1,61 +1,39 @@
 # How to edit dtll.org
 
-The site is the GitHub repo **LNMD2025/dtll-careers**.
-Once Cloudflare Pages is connected to that repo, every save on `main` goes live.
+## Fastest: Admin (no GitHub)
 
-## Fastest: edit in the browser
+On the Worker preview (or later on dtll.org once cut over):
+
+1. Open `/admin/`
+2. Enter your `@lnmd.com.au` email
+3. Click the magic link in your inbox
+4. **Jobs** — New job / Edit / Archive / arrows to reorder. Careers updates itself.
+5. **Images** — pick a slot, choose a photo, Upload. That page uses the new photo on the next load.
+
+Only Dean, Tash and Courtney (`@lnmd.com.au`) can sign in.
+
+Applications still go to courtney@lnmd.com.au through the same Careers form. Do not change that form unless Courtney asks.
+
+## Still works: edit in GitHub
+
+The site is also the GitHub repo **LNMD2025/dtll-careers**.
+Cloudflare Pages project `dtll-careers` still publishes `main` to **https://dtll.org**.
 
 1. Open https://github.com/LNMD2025/dtll-careers
-2. Click the file (e.g. `careers.html` or `js/main.js`)
+2. Click the file
 3. Click the pencil
-4. Change the text
-5. Commit to `main`
-
-Cloudflare rebuilds in about a minute.
+4. Commit to `main`
 
 ## What file controls what
 
-| Want to change | File |
+| Want to change | Where |
 |---|---|
+| Job titles, locations, who is hiring | **Admin → Jobs** (or `js/main.js` fallback list) |
+| Hero / product / store photos | **Admin → Images** (slots). Files in `media/` stay as the fallback |
+| Apply form / Courtney email / resume + cover letter | `careers.html` (multipart FormSubmit) — leave this alone for MVP |
 | Home page copy | `index.html` |
-| Jobs list (titles, locations, descriptions) | `js/main.js` — the `jobs` array |
-| Apply form / Courtney email / resume + cover letter | `careers.html` (multipart FormSubmit) |
 | Pizza / pasta / coffee / cookie pages | `pizzas.html` `pasta.html` `coffee.html` `cookies.html` |
 | Colours, type, layout | `css/styles.css` |
-| Photos | drop files into `media/` (preferred) or `images/` then point the `src` at them |
-
-## Add a photo from Drive or Instagram
-
-1. Download the image to your computer (from Drive or IG).
-2. In the repo click **Add file → Upload files**.
-3. Put it in `media/` e.g. `media/pizza-hero.jpg` (or `images/` if you prefer that folder).
-4. In the HTML change the image tag to:
-
-```html
-<img src="media/pizza-hero.jpg" alt="Dough Bros pizza" />
-```
-
-Drive links will **not** work on the public site unless the file is set to “Anyone with the link”. Uploading into `media/` is the reliable way.
-
-Home + careers already use the Dean-owned Drive set in `media/` (`doughbros-*.jpg`, `paradise-*.jpg`, `nalou-*.jpg` / `.png`). Folder IDs and the filename map: `media/SOURCES.md`.
-
-## Add or remove a job
-
-Open `js/main.js`. Each role looks like:
-
-```js
-{
-  id: "pizza-maker-db",
-  title: "Pizza Maker",
-  brand: "DoughBros",
-  location: "Mount Gambier Marketplace",
-  type: "Full-time / Part-time",
-  summary: "One line on the card.",
-  body: "Full description in the popup."
-}
-```
-
-Copy a block, change the fields, save.
 
 ## Brand name
 

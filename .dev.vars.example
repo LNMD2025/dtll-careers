@@ -1,0 +1,8 @@
+# Copy to .dev.vars for local `npm run dev`.
+# Anon key is also in wrangler.jsonc vars (it is public).
+# Service role is optional: if unset, admin writes use the signed-in user's JWT + RLS.
+
+SUPABASE_URL=https://axrrlolqkzbeqrkjyoen.supabase.co
+SUPABASE_ANON_KEY=replace-with-anon-or-publishable-key
+# SUPABASE_SERVICE_ROLE_KEY=replace-with-service-role-never-commit
+ADMIN_EMAIL_DOMAIN=lnmd.com.au
