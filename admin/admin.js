@@ -88,7 +88,7 @@ async function loadJobs() {
 
 async function loadMedia() {
   const data = await api("/api/admin/media");
-  media = data.media || [];
+  media = data.pages || [];
   renderMedia();
 }
 
@@ -138,41 +138,81 @@ function mediaSrc(item) {
 
 function renderMedia() {
   const list = $("#media-admin-list");
-  list.innerHTML = media.map((item) => `
-    <article class="admin-media" data-slot="${escapeHtml(item.slot_key)}">
-      <img src="${escapeHtml(mediaSrc(item))}" alt="${escapeHtml(item.title || item.slot_key)}" />
-      <form>
-        <div class="slot">${escapeHtml(item.slot_key)}</div>
-        <h3>${escapeHtml(item.title || item.slot_key)}</h3>
-        <label>Replace image
-          <input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/gif" />
-        </label>
-        <button class="btn" type="submit">Upload</button>
-        <p class="admin-status" data-status></p>
-      </form>
-    </article>
+  if (!media.length) {
+    list.innerHTML = `<p class="admin-hint">No image slots yet.</p>`;
+    return;
+  }
+  list.innerHTML = media.map((page) => `
+    <section class="admin-media-page" data-page="${escapeHtml(page.page)}">
+      <h3>${escapeHtml(page.label)} page</h3>
+      <div class="admin-media-grid">
+        ${(page.slots || []).map((item) => `
+          <article class="admin-media" data-slot="${escapeHtml(item.slot_key)}">
+            <img src="${escapeHtml(mediaSrc(item))}" alt="${escapeHtml(item.label || item.title)}" />
+            <form>
+              <div class="slot-label">${escapeHtml(item.label || item.title)}</div>
+              <label>Replace image
+                <input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/gif" />
+              </label>
+              <div class="overlay-fields">
+                <label>Overlay title
+                  <input type="text" name="overlay_title" value="${escapeHtml(item.overlay_title || "")}" />
+                </label>
+                <label>Overlay kicker
+                  <input type="text" name="overlay_subtitle" value="${escapeHtml(item.overlay_subtitle || "")}" />
+                </label>
+                <label>Overlay body
+                  <textarea name="overlay_body">${escapeHtml(item.overlay_body || "")}</textarea>
+                </label>
+              </div>
+              <button class="btn" type="submit" data-save-overlay>Save overlay</button>
+              <button class="btn" type="submit" data-upload>Upload photo</button>
+              <p class="admin-status" data-status></p>
+            </form>
+          </article>
+        `).join("")}
+      </div>
+    </section>
   `).join("");
 
   $$(".admin-media", list).forEach((card) => {
     const form = $("form", card);
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const file = form.querySelector('input[type="file"]').files[0];
       const status = $("[data-status]", card);
-      if (!file) {
-        setStatus(status, "Choose a file first.", "err");
-        return;
-      }
-      const body = new FormData();
-      body.append("slot_key", card.dataset.slot);
-      body.append("title", $("h3", card).textContent);
-      body.append("file", file);
-      setStatus(status, "Uploading…");
+      const file = form.querySelector('input[type="file"]').files[0];
+      const overlay = {
+        overlay_title: form.overlay_title.value,
+        overlay_subtitle: form.overlay_subtitle.value,
+        overlay_body: form.overlay_body.value,
+      };
+      const clicked = event.submitter;
+      const wantsUpload = clicked?.hasAttribute("data-upload") || !!file;
       try {
-        const data = await api("/api/admin/media", { method: "POST", body });
-        const img = $("img", card);
-        img.src = `${data.media.public_url}?t=${Date.now()}`;
-        setStatus(status, "Updated. Public pages will show this on the next load.", "ok");
+        if (wantsUpload) {
+          if (!file) {
+            setStatus(status, "Choose a file first.", "err");
+            return;
+          }
+          const body = new FormData();
+          body.append("slot_key", card.dataset.slot);
+          body.append("file", file);
+          body.append("overlay_title", overlay.overlay_title);
+          body.append("overlay_subtitle", overlay.overlay_subtitle);
+          body.append("overlay_body", overlay.overlay_body);
+          setStatus(status, "Uploading…");
+          const data = await api("/api/admin/media", { method: "POST", body });
+          const img = $("img", card);
+          img.src = `${data.media.public_url}?t=${Date.now()}`;
+          setStatus(status, "Photo and overlay saved. Reload the public page to see it.", "ok");
+          return;
+        }
+        setStatus(status, "Saving overlay…");
+        await api(`/api/admin/media/${card.dataset.slot}`, {
+          method: "PATCH",
+          body: JSON.stringify(overlay),
+        });
+        setStatus(status, "Overlay saved. Reload the public page to see it.", "ok");
       } catch (err) {
         setStatus(status, err.message, "err");
       }
