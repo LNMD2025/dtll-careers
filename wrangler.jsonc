@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dtll-cms",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "SUPABASE_URL": "https://axrrlolqkzbeqrkjyoen.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4cnJsb2xxa3piZXFya2p5b2VuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyODgyNTksImV4cCI6MjEwMzg2NDI1OX0.cqO3QBarmje2SqGkqLlYFn0PSqiie0YiR9wRPEj8pk0",
+    "ADMIN_EMAIL_DOMAIN": "lnmd.com.au"
+  }
+}
