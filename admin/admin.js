@@ -1,7 +1,7 @@
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-let supabase = null;
+let sbClient = null;
 let session = null;
 let jobs = [];
 let media = [];
@@ -42,7 +42,7 @@ async function loadConfig() {
   const res = await fetch("/api/config");
   if (!res.ok) throw new Error("Could not load admin config.");
   config = await res.json();
-  supabase = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
+  sbClient = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
 }
@@ -63,7 +63,7 @@ function showLoggedIn(email) {
 }
 
 async function refreshSession() {
-  const { data } = await supabase.auth.getSession();
+  const { data } = await sbClient.auth.getSession();
   session = data.session;
   if (!session) {
     showLoggedOut();
@@ -249,7 +249,7 @@ $("#login-form").addEventListener("submit", async (event) => {
     return;
   }
   setStatus(loginStatus, "Sending link…");
-  const { error } = await supabase.auth.signInWithOtp({
+  const { error } = await sbClient.auth.signInWithOtp({
     email,
     options: { emailRedirectTo: `${window.location.origin}/admin/` },
   });
@@ -261,7 +261,7 @@ $("#login-form").addEventListener("submit", async (event) => {
 });
 
 $("#sign-out").addEventListener("click", async () => {
-  await supabase.auth.signOut();
+  await sbClient.auth.signOut();
   session = null;
   showLoggedOut();
 });
@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setStatus(loginStatus, err.message, "err");
     return;
   }
-  supabase.auth.onAuthStateChange(async (_event, next) => {
+  sbClient.auth.onAuthStateChange(async (_event, next) => {
     session = next;
     if (next && appPanel.hidden) {
       const ok = await refreshSession();
