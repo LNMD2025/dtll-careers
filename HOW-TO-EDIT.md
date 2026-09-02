@@ -5,12 +5,9 @@
 On the Worker preview (or later on dtll.org once cut over):
 
 1. Open `/admin/`
-2. Enter your `@lnmd.com.au` email
-3. Click the magic link in your inbox
-4. **Jobs** — New job / Edit / Archive / arrows to reorder. Careers updates itself.
-5. **Images** — pick a slot, choose a photo, Upload. That page uses the new photo on the next load.
-
-Only Dean, Tash and Courtney (`@lnmd.com.au`) can sign in.
+2. Sign in with email and password
+3. **Jobs** — New job / Edit / Archive / arrows to reorder. Careers updates itself.
+4. **Images** — pick a slot, choose a photo, Upload. That page uses the new photo on the next load.
 
 Applications still go to courtney@lnmd.com.au through the same Careers form. Do not change that form unless Courtney asks.
 

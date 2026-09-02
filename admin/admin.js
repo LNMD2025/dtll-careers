@@ -43,7 +43,7 @@ async function loadConfig() {
   if (!res.ok) throw new Error("Could not load admin config.");
   config = await res.json();
   sbClient = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
   });
 }
 
@@ -242,22 +242,24 @@ $$(".admin-tab").forEach((btn) => {
 
 $("#login-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const email = $("#login-email").value.trim().toLowerCase();
-  const domain = config?.adminEmailDomain || "lnmd.com.au";
-  if (!email.endsWith(`@${domain}`)) {
-    setStatus(loginStatus, `Use a @${domain} email.`, "err");
-    return;
-  }
-  setStatus(loginStatus, "Sending link…");
-  const { error } = await sbClient.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: `${window.location.origin}/admin/` },
-  });
+  const email = $("#login-email").value.trim();
+  const password = $("#login-password").value;
+  setStatus(loginStatus, "");
+  const { error } = await sbClient.auth.signInWithPassword({ email, password });
   if (error) {
-    setStatus(loginStatus, error.message, "err");
+    setStatus(loginStatus, "Invalid email or password", "err");
     return;
   }
-  setStatus(loginStatus, "Check your inbox for the magic link.", "ok");
+  const ok = await refreshSession();
+  if (ok) {
+    await loadJobs();
+    await loadMedia();
+    return;
+  }
+  await sbClient.auth.signOut();
+  session = null;
+  showLoggedOut();
+  setStatus(loginStatus, "Invalid email or password", "err");
 });
 
 $("#sign-out").addEventListener("click", async () => {

@@ -123,7 +123,7 @@ async function requireAdmin(request: Request, env: Env): Promise<{ user: AuthUse
   });
   if (status !== 200 || !data?.id) return errorJson(error || "Session expired. Sign in again.", 401);
   if (!isAdminEmail(data.email, env)) {
-    return errorJson(`Only @${adminDomain(env)} emails can use admin.`, 403);
+    return errorJson("Not authorized.", 403);
   }
   return { user: data, jwt };
 }
@@ -408,7 +408,6 @@ async function handleApi(request: Request, env: Env): Promise<Response> {
     return json({
       supabaseUrl: env.SUPABASE_URL,
       supabaseAnonKey: env.SUPABASE_ANON_KEY,
-      adminEmailDomain: adminDomain(env),
     });
   }
 
@@ -418,7 +417,7 @@ async function handleApi(request: Request, env: Env): Promise<Response> {
   if (path === "/api/admin/session" && method === "GET") {
     const auth = await requireAdmin(request, env);
     if (auth instanceof Response) return auth;
-    return json({ email: auth.user.email, domain: adminDomain(env) });
+    return json({ email: auth.user.email });
   }
 
   if (path.startsWith("/api/admin/")) {
