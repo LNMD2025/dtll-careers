@@ -9,11 +9,19 @@ const fallbackJobs = [
   {id:"supervisor",title:"Shift Supervisor",brand:"All brands",store:"all",location:"Mount Gambier",type:"Full-time",summary:"Run a shift: people, tickets, quality and close-down.",body:"Open or close, set the pace, coach juniors, protect food quality. Path into store management."},
   {id:"store-manager",title:"Store Manager",brand:"All brands",store:"all",location:"Mount Gambier",type:"Full-time",summary:"P&L, people, product.",body:"Rostering, food cost, hiring, service standards. Multi-site hospitality management preferred."}
 ];
-let jobs = fallbackJobs.slice();
+let jobs = [];
+let jobsReady = false;
 const generalJob = {id:"general",title:"General application",brand:"All brands",store:"all",location:"Mount Gambier",type:"",summary:"Don’t see the right title?",body:"Send a general application across Dough Bros, Paradise Pizzas and Nalou Kitchen. Courtney will route it."};
 
 function $(s,r=document){return r.querySelector(s)}
 function $all(s,r=document){return [...r.querySelectorAll(s)]}
+function escapeHtml(value){
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;");
+}
 function toggleNav(){const l=$(".nav-links"); if(l) l.classList.toggle("open")}
 function matchesFilter(job, filter){
   if(filter==="All") return true;
@@ -26,8 +34,16 @@ function matchesFilter(job, filter){
 }
 function renderJobs(filter="All"){
   const list=$("#job-list"); if(!list) return;
+  if(!jobsReady){
+    list.innerHTML=`<p class="job-loading" style="color:#6e6e73;text-align:center;padding:28px 0">Loading roles…</p>`;
+    return;
+  }
   const filtered=jobs.filter(j=>matchesFilter(j, filter));
-  list.innerHTML=filtered.map(j=>`<button class="job" data-id="${j.id}" type="button"><div><h3>${j.title}</h3><div class="meta"><span class="pill">${j.brand}</span><span>${j.location}</span><span>${j.type}</span></div><p style="margin-top:10px;color:#6e6e73;font-size:15px">${j.summary}</p></div><span class="btn" style="pointer-events:none;padding:8px 16px;font-size:14px">Apply</span></button>`).join("");
+  if(!filtered.length){
+    list.innerHTML=`<p style="color:#6e6e73;text-align:center;padding:28px 0">No open roles in this filter. Send a general application below.</p>`;
+    return;
+  }
+  list.innerHTML=filtered.map(j=>`<button class="job" data-id="${escapeHtml(j.id)}" type="button"><div><h3>${escapeHtml(j.title)}</h3><div class="meta"><span class="pill">${escapeHtml(j.brand)}</span><span>${escapeHtml(j.location)}</span><span>${escapeHtml(j.type)}</span></div><p style="margin-top:10px;color:#6e6e73;font-size:15px">${escapeHtml(j.summary)}</p></div><span class="btn" style="pointer-events:none;padding:8px 16px;font-size:14px">Apply</span></button>`).join("");
   $all(".job",list).forEach(el=>el.addEventListener("click",()=>openJob(el.dataset.id)));
 }
 function findJob(id){
@@ -85,35 +101,57 @@ function initCinematic(){
   if(reduce.addEventListener) reduce.addEventListener("change",apply);
   apply();
 }
+function mapJob(j){
+  return {
+    id:j.id,
+    title:j.title,
+    brand:j.brand,
+    store:j.store,
+    location:j.location || j.location_label || "",
+    type:j.type || j.employment_type || "",
+    summary:j.summary || j.title,
+    body:j.body || j.description || ""
+  };
+}
 async function loadLiveJobs(){
   if(!$("#job-list")) return;
   try{
-    const res=await fetch("/api/jobs",{headers:{accept:"application/json"}});
-    if(!res.ok) return;
+    const res=await fetch("/api/jobs",{cache:"no-store",headers:{accept:"application/json"}});
+    if(!res.ok) throw new Error("jobs");
     const data=await res.json();
-    if(Array.isArray(data.jobs) && data.jobs.length){
-      jobs=data.jobs.map(j=>({
-        id:j.id,
-        title:j.title,
-        brand:j.brand,
-        store:j.store,
-        location:j.location || j.location_label || "",
-        type:j.type || j.employment_type || "",
-        summary:j.summary || j.title,
-        body:j.body || j.description || ""
-      }));
+    if(Array.isArray(data.jobs)){
+      jobs=data.jobs.map(mapJob);
+      jobsReady=true;
       const active=$(".filter.active");
       renderJobs(active?active.dataset.filter:"All");
+      return;
     }
+    throw new Error("jobs");
   }catch(_err){
-    // Keep the hardcoded fallback so Cloudflare Pages still shows roles.
+    jobs=fallbackJobs.slice();
+    jobsReady=true;
+    const active=$(".filter.active");
+    renderJobs(active?active.dataset.filter:"All");
   }
+}
+function applyOverlays(slots){
+  $all("[data-overlay]").forEach(el=>{
+    const item=slots[el.dataset.overlay];
+    if(!item) return;
+    const kicker=el.querySelector("[data-overlay-kicker], .kicker, .hero-kicker");
+    const title=el.querySelector("[data-overlay-title], h1.mega, h2.mega, header h1, h1");
+    const body=el.querySelector("[data-overlay-body], .mega-sub, .sub");
+    if(kicker && item.overlay_subtitle) kicker.textContent=item.overlay_subtitle;
+    if(title && item.overlay_title) title.textContent=item.overlay_title;
+    if(body && item.overlay_body) body.textContent=item.overlay_body;
+  });
 }
 async function applyMediaSlots(){
   const slotted=$all("[data-slot]");
-  if(!slotted.length) return;
+  const overlays=$all("[data-overlay]");
+  if(!slotted.length && !overlays.length) return;
   try{
-    const res=await fetch("/api/media",{headers:{accept:"application/json"}});
+    const res=await fetch("/api/media",{cache:"no-store",headers:{accept:"application/json"}});
     if(!res.ok) return;
     const data=await res.json();
     const slots=data.slots || {};
@@ -123,8 +161,9 @@ async function applyMediaSlots(){
       const next=item.public_url;
       if(next && img.getAttribute("src")!==next) img.src=next;
     });
+    applyOverlays(slots);
   }catch(_err){
-    // Static media/ files already in the HTML.
+    // Static media/ files and hardcoded overlay copy already in the HTML.
   }
 }
 document.addEventListener("DOMContentLoaded",()=>{
