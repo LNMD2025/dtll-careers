@@ -3,12 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --local --types false",
     "deploy": "wrangler deploy",
     "types": "wrangler types"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.57.4"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
