@@ -256,7 +256,8 @@ async function applyMediaSlots(){
   }catch(_err){ /* static media + HTML copy already present */ }
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
+function initSite(){
+  if(window.__dtllInit) return; window.__dtllInit=true;
   const toggle=$(".nav-toggle"); if(toggle) toggle.addEventListener("click",toggleNav);
   $all(".nav-links a").forEach(a=>a.addEventListener("click",()=>{const l=$(".nav-links"); if(l) l.classList.remove("open")}));
   renderJobs();
@@ -272,4 +273,5 @@ document.addEventListener("DOMContentLoaded",()=>{
   loadLiveJobs();
   loadHomeRoles();
   applyMediaSlots();
-});
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initSite); else initSite();

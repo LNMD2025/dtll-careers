@@ -49,6 +49,8 @@ npm install
 npx wrangler deploy
 ```
 
+Note: deploy from a clean folder containing only the public files (html, css, js, media, admin, images, favicon) as the assets directory, so `node_modules` and `.dev.vars` are never uploaded.
+
 Optional secret (admin writes work via signed-in JWT + RLS without it):
 
 ```bash
