@@ -31,3 +31,17 @@ body.showcase .copyright{border-top-color:var(--line-dark)}
 .index-links a span{display:block;font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:0;color:#86868b;margin-top:-4px;margin-bottom:10px}
 @media(max-width:860px){.gallery{grid-template-columns:1fr 1fr}.gallery .wide{grid-column:span 2;height:240px}.gallery img{height:200px}.careers-media{grid-template-columns:1fr}.careers-media img{height:220px}.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:#161617;padding:18px 22px 24px;align-items:flex-start;gap:14px}.nav-toggle{display:block}.grid-3,.split,.specs,.footer-grid,.form-row{grid-template-columns:1fr}.job{grid-template-columns:1fr}.hero{min-height:auto;padding-top:72px}.chapter{min-height:160vh}.chapter-copy.early{top:14vh}.mega{font-size:clamp(48px,16vw,96px)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chapter,.chapter-short{min-height:100vh}.chapter-visual img{transform:none;will-change:auto}.chapter-visual.crossfade img.from{opacity:0}.chapter-visual.crossfade img.to{opacity:1}.chapter-copy,.chapter-copy.mid,.chapter-copy.early{opacity:1;transform:none}.card{transition:none}}
+
+/* Hiring band (home) + global hiring CTA */
+.nav-cta{background:#ffd23f!important;color:#111!important;font-weight:700}
+.hiring-band{background:#ffd23f;color:#111;padding:14vh 24px;text-align:center}
+.hiring-band .kicker{color:#111;opacity:.75;letter-spacing:.14em;text-transform:uppercase;font-size:14px;font-weight:700}
+.hiring-band h2{font-size:clamp(52px,10vw,120px);font-weight:900;letter-spacing:-.045em;line-height:.95;margin-top:10px}
+.hiring-roles{max-width:1040px;margin:40px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.hiring-roles a{flex:1 1 220px;max-width:250px}
+.hiring-roles a{display:block;background:#111;color:#fff;border-radius:18px;padding:22px 18px;text-align:left;transition:transform .15s ease}
+.hiring-roles a:hover{transform:translateY(-3px)}
+.hiring-roles b{display:block;font-size:20px;line-height:1.1}
+.hiring-roles span{display:block;margin-top:6px;color:#ffd23f;font-size:14px;font-weight:600}
+.hiring-all{display:inline-block;margin-top:30px;font-weight:700;font-size:19px;border-bottom:2px solid #111}
+@media(max-width:560px){.hiring-roles a{max-width:none;flex-basis:40%}}
