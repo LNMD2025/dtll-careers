@@ -8,6 +8,24 @@ Live **https://dtll.org** and **https://www.dtll.org** are served by Worker **`d
 
 Cloudflare Pages project **`dtll-careers`** is **pages.dev only** — it is not the live custom-domain site. Keep GitHub `main` API-aware (`js/main.js` fetches `/api/jobs`) so a Pages rebuild cannot regress to hardcoded jobs.
 
+## Hiring links (Sept 2026)
+
+Careers supports deep links that open a role straight away — use these in socials, SMS, QR codes and ads:
+
+| Short link | Opens |
+|---|---|
+| `dtll.org/db-drivers` | Dough Bros — Delivery Driver |
+| `dtll.org/db-kitchen` | Dough Bros — Kitchen Crew |
+| `dtll.org/paradise-drivers` | Paradise — Delivery Driver |
+| `dtll.org/nalou-chef` | Nalou — Chef (full-time) |
+| `dtll.org/drivers`, `/jobs`, `/hiring`, `/apply` | Careers (drivers / all roles) |
+
+Long form also works: `/careers?brand=paradise&role=driver`, `/careers?role=doughbros-kitchen-crew`. Add `utm_source=instagram` etc. and it lands in the application email as **source**.
+
+The Worker also injects Google for Jobs `JobPosting` data for every active role, and swaps the page title / OG preview per role so link previews say “Paradise Pizzas is hiring: Delivery Driver”.
+
+Apply form: resume and cover letter are optional (drivers and kitchen crew rarely have one ready). Driver roles ask for a licence + own car confirmation. Honeypot field blocks basic spam.
+
 ## Admin
 
 1. Open https://dtll.org/admin/ (same origin as the live site).
@@ -30,6 +48,8 @@ Do not attach `dtll.org` to another Worker or Pages project. Do not create a new
 npm install
 npx wrangler deploy
 ```
+
+Note: deploy from a clean folder containing only the public files (html, css, js, media, admin, images, favicon) as the assets directory, so `node_modules` and `.dev.vars` are never uploaded.
 
 Optional secret (admin writes work via signed-in JWT + RLS without it):
 

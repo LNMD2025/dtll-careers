@@ -81,6 +81,7 @@ export const SLOT_CATALOG: SlotDef[] = [
 
   slot("careers", CAREERS, 1, "careers-1", "/media/careers-team.jpg", "Work across DTLL Group", "DTLL Group careers", "Apply across Dough Bros, Paradise Pizzas and Nalou Kitchen. Attach a resume and cover letter."),
   slot("careers", CAREERS, 2, "careers-2", "/media/careers-line.jpg"),
+  slot("careers", CAREERS, 3, "careers-3", "/media/careers-line.jpg", "Get on the crew.", "Now hiring · Mount Gambier", "Dough Bros, Paradise Pizzas and Nalou Kitchen. Three kitchens, one standard. No cover letter needed — apply in a few minutes."),
 ];
 
 export const SLOT_BY_KEY = new Map(SLOT_CATALOG.map((s) => [s.slot_key, s]));

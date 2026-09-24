@@ -180,14 +180,24 @@ function storeLabel(store: string): string {
   }
 }
 
+const HEADING_RE = /^(what you[’']?ll do|what you need|what we offer|what you get|the role|about (the role|you|us)|perks|requirements|responsibilities|you[’']?ll need|nice to have)\s*:?\s*$/i;
+
 function splitDescription(description: string): { summary: string; body: string } {
-  const text = description || "";
-  const parts = text.split(/\n\n+/);
-  if (parts.length > 1) {
-    return { summary: parts[0], body: parts.slice(1).join("\n\n") };
+  const text = (description || "").replace(/\r/g, "");
+  const lines = text.split("\n").map((l) => l.trim());
+  const intro: string[] = [];
+  let i = 0;
+  for (; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) {
+      if (intro.length) break;
+      continue;
+    }
+    if (HEADING_RE.test(line) || /^[-•*]/.test(line)) break;
+    intro.push(line);
   }
-  const firstLine = text.split(/\n/)[0] || text;
-  return { summary: firstLine || text, body: text };
+  const summary = intro.join(" ");
+  return { summary: summary || lines.find(Boolean) || "", body: text };
 }
 
 function publicJob(row: JobRow) {
@@ -587,6 +597,175 @@ async function serveAsset(request: Request, env: Env, pathname?: string): Promis
   return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
 }
 
+// ---------- Short links for social posts, QR codes and SMS ----------
+const SHORT_LINKS: Record<string, string> = {
+  "/jobs": "/careers",
+  "/hiring": "/careers",
+  "/apply": "/careers",
+  "/drivers": "/careers?role=driver",
+  "/db-drivers": "/careers?brand=doughbros&role=driver",
+  "/doughbros-drivers": "/careers?brand=doughbros&role=driver",
+  "/db-kitchen": "/careers?brand=doughbros&role=kitchen",
+  "/kitchen": "/careers?brand=doughbros&role=kitchen",
+  "/paradise-drivers": "/careers?brand=paradise&role=driver",
+  "/pp-drivers": "/careers?brand=paradise&role=driver",
+  "/chef": "/careers?brand=nalou&role=chef",
+  "/nalou-chef": "/careers?brand=nalou&role=chef",
+};
+
+const BRAND_FULL: Record<string, string> = {
+  doughbros: "DoughBros",
+  paradise: "Paradise Pizzas",
+  nalou: "Nalou Kitchen",
+  all: "DTLL Group",
+};
+const BRAND_ALIAS: Record<string, string> = { doughbros: "doughbros", db: "doughbros", paradise: "paradise", pp: "paradise", nalou: "nalou", nk: "nalou", group: "all", all: "all" };
+const BRAND_IMAGE: Record<string, string> = {
+  doughbros: "/media/doughbros-shop-01.jpg",
+  paradise: "/media/paradise-shop-02.jpg",
+  nalou: "/media/nalou-food-01.jpg",
+  all: "/media/careers-line.jpg",
+};
+const STREET: Record<string, string> = {
+  paradise: "205 Commercial St W",
+  nalou: "82 Commercial St W",
+};
+
+function slugify(s: string): string {
+  return String(s || "").toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+function jobSlug(j: JobRow): string {
+  return slugify(`${j.store === "all" ? "group" : j.store}-${j.title.split(/[—–(/]/)[0]}`);
+}
+function findRole(jobsList: JobRow[], brandRaw: string, roleRaw: string): JobRow | null {
+  const role = slugify(roleRaw);
+  if (!role) return null;
+  const direct = jobsList.find((j) => j.id === roleRaw || jobSlug(j) === role);
+  if (direct) return direct;
+  const parts = role.split("-");
+  const brand = BRAND_ALIAS[brandRaw.toLowerCase()] || parts.map((w) => BRAND_ALIAS[w]).find(Boolean) || "";
+  const words = parts.filter((w) => w && !BRAND_ALIAS[w]).map((w) => w.replace(/s$/, ""));
+  let best: JobRow | null = null;
+  let bestScore = 0;
+  for (const j of jobsList) {
+    if (brand && j.store !== brand) continue;
+    const t = slugify(j.title);
+    const score = words.reduce((n, w) => n + (t.includes(w) ? 1 : 0), 0);
+    if (score > bestScore) {
+      best = j;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+function employmentTypes(label: string): string[] {
+  const l = (label || "").toLowerCase();
+  const out: string[] = [];
+  if (l.includes("full")) out.push("FULL_TIME");
+  if (l.includes("part")) out.push("PART_TIME");
+  if (l.includes("casual")) out.push("PART_TIME", "TEMPORARY");
+  return [...new Set(out.length ? out : ["PART_TIME"])];
+}
+function htmlDescription(text: string): string {
+  const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return (text || "")
+    .split(/\n+/)
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map((l) => (/^[-•*]/.test(l) ? `<li>${esc(l.replace(/^[-•*]\s*/, ""))}</li>` : `<p>${esc(l)}</p>`))
+    .join("");
+}
+function jobPosting(j: JobRow, origin: string) {
+  const posted = (j.created_at || new Date().toISOString()).slice(0, 10);
+  const valid = new Date(Date.parse(j.updated_at || j.created_at || new Date().toISOString()) + 60 * 86400000).toISOString();
+  const street = STREET[j.store] || (j.location_label && /\d/.test(j.location_label) ? j.location_label : undefined);
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: j.title,
+    description: htmlDescription(j.description) || j.title,
+    datePosted: posted,
+    validThrough: valid,
+    employmentType: employmentTypes(j.employment_type),
+    directApply: true,
+    url: `${origin}/careers?role=${jobSlug(j)}`,
+    identifier: { "@type": "PropertyValue", name: "DTLL Group", value: j.id },
+    hiringOrganization: { "@type": "Organization", name: BRAND_FULL[j.store] || "DTLL Group", sameAs: origin, logo: `${origin}/favicon.svg` },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        ...(street ? { streetAddress: street } : {}),
+        addressLocality: "Mount Gambier",
+        addressRegion: "SA",
+        postalCode: "5290",
+        addressCountry: "AU",
+      },
+    },
+  };
+}
+class SetAttr {
+  constructor(private attr: string, private value: string) {}
+  element(el: Element) {
+    el.setAttribute(this.attr, this.value);
+  }
+}
+class SetText {
+  constructor(private value: string) {}
+  element(el: Element) {
+    el.setInnerContent(this.value);
+  }
+}
+class AppendHead {
+  constructor(private html: string) {}
+  element(el: Element) {
+    el.append(this.html, { html: true });
+  }
+}
+
+async function serveCareers(request: Request, env: Env): Promise<Response> {
+  const res = await serveAsset(request, env, "/careers.html");
+  if (!res.ok) return res;
+  const url = new URL(request.url);
+  let active: JobRow[] = [];
+  try {
+    const { data, error } = await rest<JobRow[]>(
+      env,
+      "/rest/v1/site_jobs?active=eq.true&select=*&order=sort_order.asc&order=created_at.asc",
+      { headers: restHeaders(env), signal: AbortSignal.timeout(4_000) },
+    );
+    if (!error && Array.isArray(data)) active = data;
+  } catch {
+    active = [];
+  }
+  const origin = url.origin.includes("dtll.org") ? "https://dtll.org" : url.origin;
+  const ld = active.map((j) => jobPosting(j, origin));
+  let rw = new HTMLRewriter();
+  if (ld.length) {
+    const safe = JSON.stringify(ld).replace(/</g, "\\u003c");
+    rw = rw.on("head", new AppendHead(`<script type="application/ld+json">${safe}</script>`));
+  }
+  const role = findRole(active, url.searchParams.get("brand") || "", url.searchParams.get("role") || "");
+  const brandOnly = BRAND_ALIAS[(url.searchParams.get("brand") || "").toLowerCase()];
+  if (role || brandOnly) {
+    const store = role ? role.store : brandOnly;
+    const brand = BRAND_FULL[store] || "DTLL Group";
+    const title = role ? `${brand} is hiring: ${role.title}` : `${brand} is hiring in Mount Gambier`;
+    const desc = role
+      ? `${role.employment_type} · ${role.location_label || "Mount Gambier"}. ${splitDescription(role.description).summary}`.slice(0, 200)
+      : `Open roles at ${brand}, Mount Gambier. Apply online in a few minutes.`;
+    const canonical = role ? `${origin}/careers?role=${jobSlug(role)}` : `${origin}/careers?brand=${store}`;
+    rw = rw
+      .on("title", new SetText(`${title} | DTLL Group`))
+      .on('meta[name="description"]', new SetAttr("content", desc))
+      .on('meta[property="og:title"]', new SetAttr("content", title))
+      .on('meta[property="og:description"]', new SetAttr("content", desc))
+      .on('meta[property="og:url"]', new SetAttr("content", canonical))
+      .on('meta[property="og:image"]', new SetAttr("content", `${origin}${BRAND_IMAGE[store] || BRAND_IMAGE.all}`));
+  }
+  return rw.transform(res);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -616,7 +795,17 @@ export default {
       }
     }
 
+    const short = SHORT_LINKS[path.toLowerCase()];
+    if (short) {
+      const target = new URL(short, url.origin);
+      url.searchParams.forEach((v, k) => target.searchParams.set(k, v));
+      return Response.redirect(target.toString(), 302);
+    }
+
     const htmlPath = HTML_PAGES[rawPath] || HTML_PAGES[path];
+    if (htmlPath === "/careers.html" && request.method.toUpperCase() === "GET") {
+      return serveCareers(request, env);
+    }
     if (htmlPath) {
       return serveAsset(request, env, htmlPath);
     }

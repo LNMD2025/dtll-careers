@@ -3,113 +3,196 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Careers — DTLL Group</title>
-  <meta name="description" content="Work across DTLL Group. Apply to Dough Bros, Paradise Pizzas and Nalou Kitchen in Mount Gambier." />
-  <meta property="og:title" content="Careers — DTLL Group" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Careers — Now hiring in Mount Gambier | DTLL Group</title>
+  <meta name="description" content="Now hiring across Dough Bros, Paradise Pizzas and Nalou Kitchen in Mount Gambier. Delivery drivers, kitchen crew, chefs and more. Apply online in a few minutes." />
+  <link rel="canonical" href="https://dtll.org/careers" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DTLL Group" />
+  <meta property="og:url" content="https://dtll.org/careers" />
+  <meta property="og:title" content="Now hiring — Dough Bros, Paradise Pizzas & Nalou" />
+  <meta property="og:description" content="Delivery drivers, kitchen crew, chefs and more in Mount Gambier. Apply online in a few minutes." />
+  <meta property="og:image" content="https://dtll.org/media/careers-line.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css?v=20260924" />
+  <link rel="stylesheet" href="/css/careers.css?v=20260924" />
 </head>
-<body>
+<body class="careers-page">
+  <a class="skip" href="#roles">Skip to open roles</a>
   <nav class="nav">
     <div class="nav-inner">
-      <a class="logo" href="index.html">DTLL <span>Group</span></a>
-      <button class="nav-toggle" aria-label="Menu">☰</button>
+      <a class="logo" href="/">DTLL <span>Group</span></a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
-        <li><a href="pizzas.html">Pizza</a></li>
-        <li><a href="pasta.html">Pasta</a></li>
-        <li><a href="coffee.html">Coffee</a></li>
-        <li><a href="cookies.html">Cookies</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a class="nav-cta" href="careers.html">We’re hiring</a></li>
+        <li><a href="/pizzas">Pizza</a></li>
+        <li><a href="/pasta">Pasta</a></li>
+        <li><a href="/coffee">Coffee</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+        <li><a href="/careers" aria-current="page">Careers</a></li>
+        <li><a class="nav-cta" href="#roles">We’re hiring</a></li>
       </ul>
     </div>
   </nav>
-  <header class="hero hero-light" style="min-height:auto;padding-bottom:24px" data-overlay="careers-1">
-    <p class="hero-kicker" data-overlay-kicker>DTLL Group careers</p>
-    <h1 data-overlay-title>Work across DTLL Group</h1>
-    <p class="sub" data-overlay-body>Apply across Dough Bros, Paradise Pizzas and Nalou Kitchen. Attach a resume and cover letter.</p>
-    <div class="careers-media">
-      <img data-slot="careers-1" src="/media/careers-team.jpg" alt="The rooms — a loaded shake in the house" />
-      <img data-slot="careers-2" src="/media/careers-line.jpg" alt="Seasoning fries on the line" />
+
+  <div class="applied-banner" id="applied-banner" role="status" hidden>
+    <strong>Application sent.</strong> Legend. We read every one — if it’s a fit, we’ll call you. Keep your phone handy.
+    <button type="button" class="applied-close" aria-label="Dismiss">×</button>
+  </div>
+
+  <header class="c-hero" data-overlay="careers-3">
+    <div class="c-hero-media" aria-hidden="true">
+      <img data-slot="careers-3" src="/media/careers-line.jpg" alt="" />
+    </div>
+    <div class="c-hero-inner">
+      <p class="c-kicker"><span class="dot"></span><span data-overlay-kicker>Now hiring · Mount Gambier</span></p>
+      <h1 data-overlay-title>Get on the crew.</h1>
+      <p class="c-sub" data-overlay-body>Dough Bros, Paradise Pizzas and Nalou Kitchen. Three kitchens, one standard. No cover letter needed — apply in a few minutes.</p>
+      <div class="c-actions">
+        <a class="c-btn" href="#roles"><span id="role-count">See open roles</span> →</a>
+      </div>
+      <div class="brand-chips" role="group" aria-label="Jump to a venue">
+        <button type="button" class="brand-chip db" data-jump="DoughBros"><b>Dough Bros</b><span>Pizza · pasta · burgers · shakes</span></button>
+        <button type="button" class="brand-chip pp" data-jump="Paradise"><b>Paradise Pizzas</b><span>Hot, fast, local pizza</span></button>
+        <button type="button" class="brand-chip nk" data-jump="Nalou"><b>Nalou Kitchen</b><span>Brunch by day · Nalou by Night</span></button>
+      </div>
     </div>
   </header>
-  <section class="section section-white" style="padding-top:24px">
+
+  <section class="c-ticker" aria-hidden="true">
+    <div class="c-ticker-track" id="ticker"><span>Delivery drivers</span><span>Kitchen crew</span><span>Chef — full-time</span><span>Delivery drivers</span><span>Kitchen crew</span><span>Chef — full-time</span></div>
+  </section>
+
+  <section class="c-roles" id="roles">
     <div class="wrap">
-      <div class="filters">
-        <button class="filter active" data-filter="All">All roles</button>
-        <button class="filter" data-filter="DoughBros">DoughBros</button>
-        <button class="filter" data-filter="Paradise">Paradise</button>
-        <button class="filter" data-filter="Nalou">Nalou</button>
-        <button class="filter" data-filter="Group">Group</button>
+      <div class="c-roles-head">
+        <div>
+          <p class="c-eyebrow">Open roles</p>
+          <h2>Pick your spot.</h2>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filter roles by venue">
+          <button class="filter active" data-filter="All" role="tab" aria-selected="true">All</button>
+          <button class="filter" data-filter="DoughBros" role="tab" aria-selected="false">Dough Bros</button>
+          <button class="filter" data-filter="Paradise" role="tab" aria-selected="false">Paradise</button>
+          <button class="filter" data-filter="Nalou" role="tab" aria-selected="false">Nalou</button>
+          <button class="filter" data-filter="Group" role="tab" aria-selected="false">Group</button>
+        </div>
       </div>
-      <div id="job-list" class="job-list"></div>
-      <p style="margin-top:28px;color:#6e6e73;font-size:14px;text-align:center">Don’t see the right title? Send a general application.</p>
-      <p style="text-align:center;margin-top:8px"><button class="btn-ghost" type="button" onclick="openJob('supervisor')" style="background:none;border:0;color:#0071e3;cursor:pointer;font-size:17px">Send a general application →</button></p>
+      <div id="job-list" class="job-list" aria-live="polite"></div>
+      <div class="c-general">
+        <p>Don’t see your role? We’re always keen to meet good people.</p>
+        <button class="c-btn ghost" type="button" data-general>Send a general application →</button>
+      </div>
     </div>
   </section>
-  <div class="modal-backdrop" id="job-modal">
-    <div class="modal" role="dialog" aria-modal="true">
+
+  <section class="c-why">
+    <div class="wrap">
+      <p class="c-eyebrow light">Why the crew stays</p>
+      <h2>Real kitchens. Real pathway.</h2>
+      <div class="why-media">
+        <img data-slot="careers-1" src="/media/careers-team.jpg" alt="A loaded shake on the counter" loading="lazy" />
+        <img data-slot="careers-2" src="/media/careers-line.jpg" alt="Seasoning fries on the line" loading="lazy" />
+      </div>
+      <div class="why-grid">
+        <article><span>01</span><h3>We train you</h3><p>New to hospo? Fine. We’ll teach you the stations, the systems and the standard.</p></article>
+        <article><span>02</span><h3>Three venues, one pathway</h3><p>Start on the line or the road and grow into shift lead, supervisor or management across the group.</p></article>
+        <article><span>03</span><h3>Shifts that fit</h3><p>Casual, part-time and full-time roles across day, evening and weekend trade.</p></article>
+        <article><span>04</span><h3>A crew, not a logo</h3><p>Local, loud and proud of the food. Rosters, training and team chat all live in one staff app.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-steps">
+    <div class="wrap">
+      <p class="c-eyebrow">How it works</p>
+      <h2>Four steps. No waffle.</h2>
+      <ol class="steps">
+        <li><b>Apply online</b><span>Takes a few minutes. Resume optional.</span></li>
+        <li><b>Quick call</b><span>We ring the good ones fast.</span></li>
+        <li><b>Meet the team</b><span>Come in, see the kitchen, ask anything.</span></li>
+        <li><b>Start training</b><span>Get rostered on and learn the ropes.</span></li>
+      </ol>
+      <p class="c-center"><a class="c-btn" href="#roles">See open roles →</a></p>
+    </div>
+  </section>
+
+  <div class="modal-backdrop" id="job-modal" aria-hidden="true">
+    <div class="modal c-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button class="close" type="button" aria-label="Close">×</button>
-      <p class="eyebrow" id="modal-meta">Role</p>
+      <p class="c-modal-brand" id="modal-brand"></p>
       <h2 id="modal-title">Role title</h2>
-      <p class="job-desc" id="modal-body"></p>
+      <p class="c-modal-meta" id="modal-meta"></p>
+      <div class="c-modal-body" id="modal-body"></div>
+      <button class="c-share" type="button" id="copy-link">Copy link to this role</button>
       <form class="form" id="apply-form" action="https://formsubmit.co/courtney@lnmd.com.au" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New job application — DTLL Group careers" />
+        <h3 class="c-form-title">Apply now</h3>
+        <input type="hidden" name="_subject" id="subject-field" value="New job application — DTLL Group careers" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <input type="hidden" name="role" id="job-field" value="" />
-        <input type="hidden" name="_next" value="https://dtll.org/careers.html" />
+        <input type="hidden" name="source" id="source-field" value="" />
+        <input type="hidden" name="_next" id="next-field" value="https://dtll.org/careers?applied=1" />
         <div class="form-row">
-          <div><label>First name<input type="text" name="first_name" required /></label></div>
-          <div><label>Last name<input type="text" name="last_name" required /></label></div>
+          <div><label>First name<input type="text" name="first_name" autocomplete="given-name" required /></label></div>
+          <div><label>Last name<input type="text" name="last_name" autocomplete="family-name" required /></label></div>
         </div>
         <div class="form-row">
-          <div><label>Email<input type="email" name="email" required /></label></div>
-          <div><label>Phone<input type="tel" name="phone" required /></label></div>
+          <div><label>Mobile<input type="tel" name="phone" autocomplete="tel" inputmode="tel" required /></label></div>
+          <div><label>Email<input type="email" name="email" autocomplete="email" required /></label></div>
         </div>
-        <label>Which brand?<select name="preferred_brand" required>
-          <option value="">Select</option>
-          <option>DoughBros</option>
-          <option>Paradise Pizzas</option>
-          <option>Nalou Kitchen</option>
-          <option>DTLL Group / any</option>
-        </select></label>
-        <label>Availability<select name="availability" required>
-          <option value="">Select</option>
-          <option>Full-time</option>
-          <option>Part-time</option>
-          <option>Casual — days</option>
-          <option>Casual — nights & weekends</option>
-          <option>Either</option>
-        </select></label>
-        <label>Why this role?<textarea name="message" required></textarea></label>
+        <div class="form-row">
+          <div><label>Which venue?<select name="preferred_brand" id="brand-field" required>
+            <option value="">Select</option>
+            <option>DoughBros</option>
+            <option>Paradise Pizzas</option>
+            <option>Nalou Kitchen</option>
+            <option>DTLL Group / any</option>
+          </select></label></div>
+          <div><label>Availability<select name="availability" required>
+            <option value="">Select</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+            <option>Casual — days</option>
+            <option>Casual — nights &amp; weekends</option>
+            <option>Flexible</option>
+          </select></label></div>
+        </div>
+        <label class="check" id="driver-check" hidden><input type="checkbox" name="licence_and_car" value="Yes — full licence and own reliable car" /> I have a current driver’s licence and my own reliable car</label>
+        <label>Tell us a bit about you<textarea name="message" rows="4" placeholder="Where you’ve worked, when you can start, why you want in. A few lines is plenty." required></textarea></label>
         <div class="form-row">
           <div>
-            <label>Resume
-              <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+            <label>Resume <em>(optional)</em>
+              <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
               <span class="file-hint">PDF, DOC or DOCX</span>
             </label>
           </div>
           <div>
-            <label>Cover letter
-              <input type="file" name="cover_letter" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+            <label>Cover letter <em>(optional)</em>
+              <input type="file" name="cover_letter" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
               <span class="file-hint">PDF, DOC or DOCX</span>
             </label>
           </div>
         </div>
-        <p class="hint">Goes to courtney@lnmd.com.au. Combined files under 10MB. Courtney may need a one-time FormSubmit confirm if she has not already.</p>
-        <button class="btn" type="submit">Submit application</button>
+        <p class="hint">Files under 10MB combined. We only use your details to assess your application.</p>
+        <button class="c-btn full" type="submit" id="submit-btn">Send application →</button>
       </form>
     </div>
   </div>
+
   <footer>
     <div class="footer-grid">
-      <div><h4>DTLL Group</h4><p>Applications to courtney@lnmd.com.au</p></div>
-      <div><h4>Venues</h4><ul><li>Dough Bros</li><li>Paradise Pizzas</li><li>Nalou Kitchen</li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="careers.html">Careers</a></li><li><a href="index.html">Home</a></li></ul></div>
+      <div><h4>DTLL Group</h4><p>Dough Bros, Paradise Pizzas and Nalou Kitchen. Mount Gambier, SA.</p></div>
+      <div><h4>Venues</h4><ul><li>Dough Bros — Mount Gambier Marketplace</li><li>Paradise Pizzas — 205 Commercial St W</li><li>Nalou Kitchen — 82 Commercial St W</li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="/careers">Careers</a></li><li><a href="/">Home</a></li></ul></div>
       <div><h4>Social</h4><ul><li><a href="https://www.instagram.com/doughbros_mtg/">@doughbros_mtg</a></li><li><a href="https://www.instagram.com/paradise_pizzas5290/">@paradise_pizzas5290</a></li><li><a href="https://www.instagram.com/naloukitchen/">@naloukitchen</a></li></ul></div>
     </div>
     <div class="copyright">© 2026 DTLL Group</div>
   </footer>
-  <script src="/js/main.js?v=20260902c"></script>
+  <script src="/js/main.js?v=20260924b"></script>
 </body>
 </html>

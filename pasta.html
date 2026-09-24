@@ -5,19 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pasta — Dough Bros &amp; Paradise · DTLL Group</title>
   <meta name="description" content="House pasta from Dough Bros and Paradise Pizzas — DTLL Group, Mount Gambier." />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css?v=20260924" />
+  <link rel="stylesheet" href="/css/theme.css?v=20260924" />
 </head>
-<body class="showcase">
+<body class="showcase" data-brand="db">
   <nav class="nav">
     <div class="nav-inner">
-      <a class="logo" href="index.html">DTLL <span>Group</span></a>
+      <a class="logo" href="/">DTLL <span>Group</span></a>
       <button class="nav-toggle" aria-label="Menu">☰</button>
       <ul class="nav-links">
-        <li><a href="pizzas.html">Pizza</a></li>
-        <li><a href="pasta.html" aria-current="page">Pasta</a></li>
-        <li><a href="coffee.html">Coffee</a></li>
-        <li><a href="cookies.html">Cookies</a></li>
-        <li><a href="careers.html">Careers</a></li>
+        <li><a href="/pizzas">Pizza</a></li>
+        <li><a href="/pasta" aria-current="page">Pasta</a></li>
+        <li><a href="/coffee">Coffee</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+        <li><a href="/careers">Careers</a></li>
+        <li><a class="nav-cta" href="/careers">We’re hiring</a></li>
       </ul>
     </div>
   </nav>
@@ -35,6 +41,8 @@
       </div>
     </div>
   </section>
+
+  <div class="t-ticker" aria-hidden="true"><div><span>Carbonara</span><span>Bolognese</span><span>Chilli penne</span><span>Lasagna</span><span>House sauce</span><span>Carbonara</span><span>Bolognese</span><span>Chilli penne</span><span>Lasagna</span><span>House sauce</span></div></div>
 
   <section class="chapter" data-chapter>
     <div class="chapter-pin">
@@ -74,12 +82,44 @@
     </div>
   </section>
 
-  <section class="index-band">
-    <p class="kicker">Keep going</p>
-    <nav class="index-links" aria-label="More from DTLL Group">
-      <a href="pizzas.html">Pizza<span>The other half of the table.</span></a>
-      <a href="coffee.html">Coffee<span>Nalou, by day.</span></a>
-    </nav>
+  <section class="t-venues" aria-labelledby="venues-title">
+    <div class="t-wrap">
+      <p class="t-eyebrow">Get your pasta</p>
+      <h2 id="venues-title">Same kitchens. Same obsession.</h2>
+      <div class="t-venue-grid">
+      <article class="t-venue db">
+        <img src="/media/doughbros-shop-01.jpg" alt="Dough Bros" loading="lazy" />
+        <span class="b">Dough Bros</span>
+        <div class="in"><h3>Dough Bros</h3><p><strong>Mount Gambier Marketplace</strong>, Mount Gambier</p><p>Pizza, pasta, burgers, shakes and loaded cookies. Pink neon, slow dough.</p>
+          <div class="links"><a class="p" href="https://www.google.com/maps/search/?api=1&query=Dough+Bros+Mount+Gambier+Marketplace+Mount+Gambier+SA" target="_blank" rel="noopener">Directions</a><a href="https://www.instagram.com/doughbros_mtg/" target="_blank" rel="noopener">@doughbros_mtg</a></div></div>
+      </article>
+      <article class="t-venue pp">
+        <img src="/media/paradise-shop-02.jpg" alt="Paradise Pizzas" loading="lazy" />
+        <span class="b">Paradise Pizzas</span>
+        <div class="in"><h3>Paradise Pizzas</h3><p><strong>205 Commercial St W</strong>, Mount Gambier</p><p>The Pizza Lovers Club. Hot, fast, local pizza.</p>
+          <div class="links"><a class="p" href="https://www.google.com/maps/search/?api=1&query=Paradise+Pizzas+205+Commercial+St+W+Mount+Gambier+SA" target="_blank" rel="noopener">Directions</a><a href="https://www.instagram.com/paradise_pizzas5290/" target="_blank" rel="noopener">@paradise_pizzas5290</a></div></div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="t-hire">
+    <div class="t-wrap">
+      <div><b>We’re hiring.</b><p>Drivers, kitchen crew and chefs across Dough Bros, Paradise and Nalou.</p></div>
+      <a href="/careers">See open roles →</a>
+    </div>
+  </section>
+
+  <section class="t-more" aria-label="More from DTLL Group">
+    <div class="t-wrap">
+      <p class="t-eyebrow">Keep going</p>
+      <h2>Still hungry?</h2>
+      <div class="t-more-grid">
+        <a href="/pizzas"><img src="/media/pizza-card.jpg" alt="" loading="lazy" /><b>Pizza</b><span>Dough Bros &amp; Paradise</span></a>
+        <a href="/coffee"><img src="/media/nalou-coffee-02.jpg" alt="" loading="lazy" /><b>Coffee</b><span>Nalou Kitchen, by day.</span></a>
+        <a href="/careers"><img src="/media/careers-line.jpg" alt="" loading="lazy" /><b>Careers</b><span>We’re hiring. Get on the crew.</span></a>
+      </div>
+    </div>
   </section>
 
   <footer>
@@ -91,17 +131,17 @@
       <div>
         <h4>Menu</h4>
         <ul>
-          <li><a href="pizzas.html">Pizza</a></li>
-          <li><a href="pasta.html">Pasta</a></li>
-          <li><a href="coffee.html">Coffee</a></li>
-          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="/pizzas">Pizza</a></li>
+          <li><a href="/pasta">Pasta</a></li>
+          <li><a href="/coffee">Coffee</a></li>
+          <li><a href="/cookies">Cookies</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/careers">Careers</a></li>
         </ul>
       </div>
       <div>
@@ -114,6 +154,6 @@
     </div>
     <div class="copyright">© 2026 DTLL Group. Mount Gambier, SA.</div>
   </footer>
-  <script src="/js/main.js?v=20260902c"></script>
+  <script src="/js/main.js?v=20260924b"></script>
 </body>
 </html>
