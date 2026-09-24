@@ -9,19 +9,23 @@
   <meta property="og:description" content="Three Mount Gambier kitchens. One group." />
   <meta property="og:image" content="https://dtll.org/media/hero-spread.jpg" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css?v=20260924" />
+  <link rel="stylesheet" href="/css/theme.css?v=20260924" />
 </head>
 <body class="showcase">
   <nav class="nav">
     <div class="nav-inner">
-      <a class="logo" href="index.html" aria-current="page">DTLL <span>Group</span></a>
+      <a class="logo" href="/" aria-current="page">DTLL <span>Group</span></a>
       <button class="nav-toggle" aria-label="Menu">☰</button>
       <ul class="nav-links">
-        <li><a href="pizzas.html">Pizza</a></li>
-        <li><a href="pasta.html">Pasta</a></li>
-        <li><a href="coffee.html">Coffee</a></li>
-        <li><a href="cookies.html">Cookies</a></li>
-        <li><a href="careers.html">Careers</a></li>
+        <li><a href="/pizzas">Pizza</a></li>
+        <li><a href="/pasta">Pasta</a></li>
+        <li><a href="/coffee">Coffee</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+        <li><a href="/careers">Careers</a></li>
         <li><a class="nav-cta" href="/careers">We’re hiring</a></li>
       </ul>
     </div>
@@ -40,6 +44,8 @@
       </div>
     </div>
   </section>
+
+  <div class="t-ticker" aria-hidden="true"><div><span>Pizza</span><span>Pasta</span><span>Burgers</span><span>Shakes</span><span>Coffee</span><span>Cookies</span><span>Mount Gambier</span><span>Pizza</span><span>Pasta</span><span>Burgers</span><span>Shakes</span><span>Coffee</span><span>Cookies</span><span>Mount Gambier</span></div></div>
 
   <section class="chapter" data-chapter>
     <div class="chapter-pin">
@@ -65,7 +71,7 @@
         <p class="kicker">Dough Bros &amp; Paradise</p>
         <h2 class="mega">Pizza</h2>
         <p class="mega-sub">Slow rise. Loaded. Built to disappear.</p>
-        <a class="chapter-link" href="pizzas.html">Enter pizza</a>
+        <a class="chapter-link" href="/pizzas">Enter pizza</a>
       </div>
     </div>
   </section>
@@ -80,7 +86,7 @@
         <p class="kicker">House sauce</p>
         <h2 class="mega">Pasta</h2>
         <p class="mega-sub">Carbonara. Bolognese. Chilli penne.</p>
-        <a class="chapter-link" href="pasta.html">Enter pasta</a>
+        <a class="chapter-link" href="/pasta">Enter pasta</a>
       </div>
     </div>
   </section>
@@ -95,7 +101,7 @@
         <p class="kicker">Nalou Kitchen</p>
         <h2 class="mega">Coffee</h2>
         <p class="mega-sub">Long coffees. Damn good food by day.</p>
-        <a class="chapter-link" href="coffee.html">Enter Nalou</a>
+        <a class="chapter-link" href="/coffee">Enter Nalou</a>
       </div>
     </div>
   </section>
@@ -110,7 +116,34 @@
         <p class="kicker">Dough Bros</p>
         <h2 class="mega">Cookies</h2>
         <p class="mega-sub">Too much. On purpose.</p>
-        <a class="chapter-link" href="cookies.html">Enter cookies</a>
+        <a class="chapter-link" href="/cookies">Enter cookies</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="t-venues" aria-labelledby="venues-title">
+    <div class="t-wrap">
+      <p class="t-eyebrow">The venues</p>
+      <h2 id="venues-title">Three rooms. One standard.</h2>
+      <div class="t-venue-grid">
+      <article class="t-venue db">
+        <img src="/media/doughbros-shop-01.jpg" alt="Dough Bros" loading="lazy" />
+        <span class="b">Dough Bros</span>
+        <div class="in"><h3>Dough Bros</h3><p><strong>Mount Gambier Marketplace</strong>, Mount Gambier</p><p>Pizza, pasta, burgers, shakes and loaded cookies. Pink neon, slow dough.</p>
+          <div class="links"><a class="p" href="https://www.google.com/maps/search/?api=1&query=Dough+Bros+Mount+Gambier+Marketplace+Mount+Gambier+SA" target="_blank" rel="noopener">Directions</a><a href="https://www.instagram.com/doughbros_mtg/" target="_blank" rel="noopener">@doughbros_mtg</a></div></div>
+      </article>
+      <article class="t-venue pp">
+        <img src="/media/paradise-shop-02.jpg" alt="Paradise Pizzas" loading="lazy" />
+        <span class="b">Paradise Pizzas</span>
+        <div class="in"><h3>Paradise Pizzas</h3><p><strong>205 Commercial St W</strong>, Mount Gambier</p><p>The Pizza Lovers Club. Hot, fast, local pizza.</p>
+          <div class="links"><a class="p" href="https://www.google.com/maps/search/?api=1&query=Paradise+Pizzas+205+Commercial+St+W+Mount+Gambier+SA" target="_blank" rel="noopener">Directions</a><a href="https://www.instagram.com/paradise_pizzas5290/" target="_blank" rel="noopener">@paradise_pizzas5290</a></div></div>
+      </article>
+      <article class="t-venue nk">
+        <img src="/media/nalou-coffee-01.jpg" alt="Nalou Kitchen" loading="lazy" />
+        <span class="b">Nalou Kitchen</span>
+        <div class="in"><h3>Nalou Kitchen</h3><p><strong>82 Commercial St W</strong>, Mount Gambier</p><p>Long coffees and brunch by day. Burgers and plates at Nalou by Night.</p>
+          <div class="links"><a class="p" href="https://www.google.com/maps/search/?api=1&query=Nalou+Kitchen+82+Commercial+St+W+Mount+Gambier+SA" target="_blank" rel="noopener">Directions</a><a href="https://www.instagram.com/naloukitchen/" target="_blank" rel="noopener">@naloukitchen</a></div></div>
+      </article>
       </div>
     </div>
   </section>
@@ -127,14 +160,17 @@
     <a class="hiring-all" href="/careers">See all open roles →</a>
   </section>
 
-  <section class="index-band">
-    <p class="kicker">The group</p>
-    <nav class="index-links" aria-label="Venues">
-      <a href="pizzas.html">Pizza<span>Dough Bros &amp; Paradise</span></a>
-      <a href="pasta.html">Pasta<span>House sauce. Italian pasta.</span></a>
-      <a href="coffee.html">Coffee<span>Nalou Kitchen</span></a>
-      <a href="cookies.html">Cookies<span>Loaded NY. Dough Bros.</span></a>
-    </nav>
+  <section class="t-more" aria-label="The menu">
+    <div class="t-wrap">
+      <p class="t-eyebrow">The menu</p>
+      <h2>What are we eating?</h2>
+      <div class="t-more-grid">
+        <a href="/pizzas"><img src="/media/pizza-card.jpg" alt="" loading="lazy" /><b>Pizza</b><span>Dough Bros &amp; Paradise</span></a>
+        <a href="/pasta"><img src="/media/pasta-card.jpg" alt="" loading="lazy" /><b>Pasta</b><span>House sauce. Same kitchens.</span></a>
+        <a href="/coffee"><img src="/media/nalou-coffee-02.jpg" alt="" loading="lazy" /><b>Coffee</b><span>Nalou Kitchen, by day.</span></a>
+        <a href="/cookies"><img src="/media/doughbros-cookie-02.jpg" alt="" loading="lazy" /><b>Cookies</b><span>Loaded NY. Dough Bros.</span></a>
+      </div>
+    </div>
   </section>
 
   <footer>
@@ -146,16 +182,16 @@
       <div>
         <h4>Menu</h4>
         <ul>
-          <li><a href="pizzas.html">Pizza</a></li>
-          <li><a href="pasta.html">Pasta</a></li>
-          <li><a href="coffee.html">Coffee</a></li>
-          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="/pizzas">Pizza</a></li>
+          <li><a href="/pasta">Pasta</a></li>
+          <li><a href="/coffee">Coffee</a></li>
+          <li><a href="/cookies">Cookies</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="careers.html">Careers — we’re hiring</a></li>
+          <li><a href="/careers">Careers — we’re hiring</a></li>
         </ul>
       </div>
       <div>

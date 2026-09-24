@@ -1,0 +1,61 @@
+/* DTLL Group theme — bold, local, loud. Shared by showcase pages (loaded after styles.css). */
+:root{--go:#ffd23f;--ink:#0b0b0c;--paper:#f4f1ea;--db:#ff2bb4;--pp:#e0262b;--nk:#7fa183;--display:"Archivo","Arial Black",system-ui,sans-serif}
+body.showcase{background:var(--ink)}
+body.showcase .mega,body.showcase h2,body.showcase h3{font-family:var(--display);font-stretch:115%;font-weight:900;letter-spacing:-.035em}
+body.showcase .mega{line-height:.9;text-transform:none}
+body.showcase .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--go);font-weight:800;letter-spacing:.16em}
+body.showcase .kicker:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent,var(--go));box-shadow:0 0 14px var(--accent,var(--go))}
+body.showcase .mega-sub{color:#dcd8cf;font-weight:600}
+body.showcase .chapter-link{margin-top:26px;background:var(--go);color:#111;font-weight:800;font-size:17px;padding:14px 24px;border-radius:999px;border:0;box-shadow:0 6px 0 #000;transition:transform .15s ease,box-shadow .15s ease}
+body.showcase .chapter-link:after{content:" →"}
+body.showcase .chapter-link:hover{transform:translateY(-2px);box-shadow:0 8px 0 #000}
+body[data-brand="db"]{--accent:var(--db)}body[data-brand="pp"]{--accent:var(--pp)}body[data-brand="nk"]{--accent:var(--nk)}
+.nav-links a[aria-current="page"]{color:#fff;box-shadow:inset 0 -2px 0 var(--go)}
+
+/* Ticker */
+.t-ticker{background:var(--go);overflow:hidden;border-block:3px solid #000;position:relative;z-index:3}
+.t-ticker div{display:flex;gap:48px;width:max-content;padding:14px 0;animation:ttick 26s linear infinite;font-family:var(--display);font-stretch:115%;font-weight:900;font-size:clamp(18px,2.2vw,26px);text-transform:uppercase;color:#111;white-space:nowrap}
+.t-ticker span:after{content:"✦";margin-left:48px}
+@keyframes ttick{to{transform:translateX(-50%)}}
+
+/* Venue cards */
+.t-venues{background:var(--paper);color:var(--ink);padding:clamp(64px,10vw,130px) 22px}
+.t-wrap{max-width:1120px;margin:0 auto}
+.t-eyebrow{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#6b6862}
+.t-venues h2,.t-more h2{font-size:clamp(40px,7vw,84px);line-height:.92;margin-top:8px}
+.t-venue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:38px}
+.t-venue{position:relative;display:flex;flex-direction:column;background:#fff;border:2px solid #111;border-radius:22px;overflow:hidden;box-shadow:0 7px 0 #111;transition:transform .15s ease,box-shadow .15s ease}
+.t-venue:hover{transform:translateY(-3px);box-shadow:0 10px 0 #111}
+.t-venue img{width:100%;height:220px;object-fit:cover;border-bottom:2px solid #111}
+.t-venue .b{position:absolute;top:14px;left:14px;background:var(--c);color:#fff;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:2px solid #111}
+.t-venue .in{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.t-venue h3{font-size:30px;line-height:1}
+.t-venue p{color:#4a4843;font-size:15px}
+.t-venue .links{margin-top:auto;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.t-venue .links a{font-weight:800;font-size:14px;padding:9px 14px;border-radius:999px;border:2px solid #111}
+.t-venue .links a.p{background:#111;color:#fff}
+.t-venue.db{--c:var(--db)}.t-venue.pp{--c:var(--pp)}.t-venue.nk{--c:#4f6d4f}
+
+/* Keep going */
+.t-more{background:var(--ink);color:#f5f5f7;padding:clamp(64px,10vw,130px) 22px}
+.t-more .t-eyebrow{color:#a8a59e}
+.t-more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:34px}
+.t-more-grid a{position:relative;display:block;height:clamp(260px,34vw,420px);border-radius:24px;overflow:hidden;border:2px solid rgba(255,255,255,.15)}
+.t-more-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.t-more-grid a:hover img{transform:scale(1.06)}
+.t-more-grid a:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.85))}
+.t-more-grid b{position:absolute;left:22px;bottom:44px;z-index:1;font-family:var(--display);font-stretch:115%;font-weight:900;font-size:clamp(32px,4.2vw,56px);letter-spacing:-.03em;line-height:1}
+.t-more-grid span{position:absolute;left:22px;bottom:18px;z-index:1;color:var(--go);font-weight:700;font-size:15px}
+
+/* Hiring strip */
+.t-hire{background:var(--go);color:#111;border-block:3px solid #000;padding:34px 22px}
+.t-hire .t-wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.t-hire b{font-family:var(--display);font-stretch:115%;font-weight:900;font-size:clamp(28px,4vw,44px);letter-spacing:-.03em;line-height:1}
+.t-hire p{font-weight:600;margin-top:6px}
+.t-hire a{background:#111;color:#fff;font-weight:800;padding:15px 24px;border-radius:999px;box-shadow:0 6px 0 rgba(0,0,0,.35)}
+
+/* Footer */
+body.showcase footer{background:#000}
+body.showcase footer h4{font-family:var(--display);font-stretch:115%;font-weight:900;letter-spacing:.02em;text-transform:uppercase;font-size:14px;color:var(--go)}
+@media(prefers-reduced-motion:reduce){.t-ticker div{animation:none}.t-more-grid img{transition:none}}
+.t-venue-grid:has(> .t-venue:only-child){grid-template-columns:minmax(0,560px)}
